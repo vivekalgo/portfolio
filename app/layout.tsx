@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description: "Discover Vivek Yadav's premium portfolio: combining AI-powered models with scalable full-stack products.",
     creator: "@vivekyadav",
   },
+  verification: {
+    google: "POZ0ks5Ly6GZnknpN_R_BXbiJN3jDFzxTz6Pld6xkTE",
+  },
 };
 
 export default function RootLayout({
