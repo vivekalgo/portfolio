@@ -12,7 +12,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#02040d] border-t border-slate-900/60 py-12">
+    <footer className="relative bg-footer border-t border-slate-900/60 py-12 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left: Logo & copyright */}

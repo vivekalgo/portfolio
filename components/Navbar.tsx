@@ -1,13 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Menu, X, Command } from "lucide-react";
+import { Terminal, Menu, X, Command, Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -28,6 +32,18 @@ export default function Navbar() {
     { name: "Contact", href: "#contact" }
   ];
 
+  const navBg = mounted && theme === 'light'
+    ? (scrolled ? "rgba(255, 255, 255, 0.55)" : "rgba(255, 255, 255, 0)")
+    : (scrolled ? "rgba(10, 15, 30, 0.75)" : "rgba(5, 8, 22, 0)");
+    
+  const navBorder = mounted && theme === 'light'
+    ? (scrolled ? "1px solid rgba(99, 102, 241, 0.12)" : "1px solid rgba(255, 255, 255, 0)")
+    : (scrolled ? "1px solid rgba(59, 130, 246, 0.18)" : "1px solid rgba(255, 255, 255, 0)");
+
+  const navShadow = mounted && theme === 'light'
+    ? (scrolled ? "0 10px 30px -10px rgba(99, 102, 241, 0.06), 0 0 20px 0 rgba(99, 102, 241, 0.02)" : "none")
+    : (scrolled ? "0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px 0 rgba(59, 130, 246, 0.05)" : "none");
+
   return (
     <>
       <motion.header
@@ -45,16 +61,12 @@ export default function Navbar() {
             maxWidth: scrolled ? "1200px" : "100%",
             marginTop: scrolled ? "16px" : "0px",
             borderRadius: scrolled ? "9999px" : "0px",
-            backgroundColor: scrolled ? "rgba(10, 15, 30, 0.75)" : "rgba(5, 8, 22, 0)",
+            backgroundColor: navBg,
             backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
-            border: scrolled 
-              ? "1px solid rgba(59, 130, 246, 0.18)" 
-              : "1px solid rgba(255, 255, 255, 0)",
+            border: navBorder,
             paddingTop: scrolled ? "12px" : "24px",
             paddingBottom: scrolled ? "12px" : "24px",
-            boxShadow: scrolled 
-              ? "0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px 0 rgba(59, 130, 246, 0.05)"
-              : "none",
+            boxShadow: navShadow,
           }}
           transition={{
             type: "spring",
@@ -86,7 +98,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Action buttons (Command Palette trigger + Mobile burger) */}
+          {/* Action buttons (Command Palette trigger + Mobile burger + Theme switcher) */}
           <div className="flex items-center gap-3">
             {/* Search/Command Console trigger */}
             <button
@@ -99,6 +111,19 @@ export default function Navbar() {
               <kbd className="hidden lg:inline-block bg-slate-950 px-1.5 py-0.5 rounded text-[10px] text-slate-500 border border-slate-800">
                 Ctrl K
               </kbd>
+            </button>
+
+            {/* Theme switcher */}
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 rounded-md bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white transition-all cursor-pointer flex items-center justify-center shrink-0"
+              title={mounted && theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            >
+              {mounted && theme === "light" ? (
+                <Moon className="w-4 h-4 text-indigo-400" />
+              ) : (
+                <Sun className="w-4 h-4 text-amber-400 animate-pulse" />
+              )}
             </button>
 
             {/* Mobile menu trigger */}
@@ -157,13 +182,34 @@ export default function Navbar() {
             </div>
 
             {/* Drawer Footer */}
-            <div className="border-t border-slate-900 pt-6">
+            <div className="border-t border-slate-900 pt-6 flex flex-col gap-4">
+              {/* Theme Toggle inside drawer */}
+              <div className="flex items-center justify-between py-1">
+                <span className="font-mono text-xs text-slate-400 tracking-wider">THEME MODE</span>
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer"
+                >
+                  {mounted && theme === "light" ? (
+                    <>
+                      <Moon className="w-3.5 h-3.5 text-indigo-400" />
+                      <span className="text-xs font-mono">Dark Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sun className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-xs font-mono">Light Mode</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   triggerCommandPalette();
                 }}
-                className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary flex items-center justify-center gap-2 font-mono text-sm font-semibold hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-shadow text-white"
+                className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary flex items-center justify-center gap-2 font-mono text-sm font-semibold hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-shadow text-white cursor-pointer"
               >
                 <Command className="w-4 h-4" />
                 Open Dashboard (Ctrl+K)

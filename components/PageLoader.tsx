@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "./ThemeProvider";
 
 interface PageLoaderProps {
   onComplete: () => void;
@@ -20,8 +21,11 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
   const [progress, setProgress] = useState(0);
   const [statusIndex, setStatusIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Progress counter animation
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -55,11 +59,20 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
     }
   }, [progress, onComplete]);
 
+  const loaderBg = mounted && theme === 'light'
+    ? "linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F5F3FF 100%)"
+    : undefined;
+
+  const loaderTitleGradient = mounted && theme === 'light'
+    ? "bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600"
+    : "text-white";
+
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 bg-[#050816] z-[9999] flex flex-col items-center justify-center p-4 overflow-hidden"
+          className="fixed inset-0 bg-background z-[9999] flex flex-col items-center justify-center p-4 overflow-hidden transition-colors duration-300"
+          style={{ background: loaderBg }}
           initial={{ opacity: 1 }}
           exit={{ 
             opacity: 0, 
@@ -76,7 +89,7 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
           <div className="w-full max-w-md text-center z-10">
             {/* Header */}
             <motion.h1 
-              className="text-4xl md:text-5xl font-extrabold tracking-[0.25em] text-white mb-16 uppercase"
+              className={`text-4xl md:text-5xl font-extrabold tracking-[0.25em] mb-16 uppercase ${loaderTitleGradient}`}
               initial={{ letterSpacing: "0.1em", opacity: 0 }}
               animate={{ letterSpacing: "0.25em", opacity: 1 }}
               transition={{ duration: 0.8 }}
@@ -87,7 +100,7 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
             {/* Percentage Indicator */}
             <div className="mb-4">
               <motion.span 
-                className="text-6xl md:text-7xl font-light font-mono text-white tracking-tighter"
+                className="text-6xl md:text-7xl font-light font-mono text-text tracking-tighter"
                 key={progress}
                 initial={{ opacity: 0.6, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -105,7 +118,7 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
               />
               {/* Glowing lead */}
               <div 
-                className="absolute top-0 h-full w-4 bg-white blur-[4px] shadow-[0_0_8px_#fff]"
+                className="absolute top-0 h-full w-4 bg-primary blur-[4px] shadow-[0_0_8px_#3b82f6]"
                 style={{ left: `calc(${progress}% - 8px)` }}
               />
             </div>

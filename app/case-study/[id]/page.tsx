@@ -23,7 +23,7 @@ export default function CaseStudyPage({ params }: PageProps) {
 
   if (!project || !project.caseStudy) {
     return (
-      <main className="min-h-screen bg-[#050816] text-white flex flex-col items-center justify-center p-6 relative">
+      <main className="min-h-screen bg-background text-text flex flex-col items-center justify-center p-6 relative transition-colors duration-300">
         <ParticleBackground />
         <div className="text-center z-10 glass-card p-8 rounded-xl border border-slate-800 max-w-md">
           <Terminal className="w-12 h-12 text-accent mx-auto mb-4 animate-bounce" />
@@ -732,7 +732,7 @@ export default function CaseStudyPage({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#050816] text-white pt-24 pb-20 relative overflow-hidden font-sans">
+    <main className="min-h-screen bg-background text-text pt-24 pb-20 relative overflow-hidden font-sans transition-colors duration-300">
       <CustomCursor />
       <ParticleBackground />
 

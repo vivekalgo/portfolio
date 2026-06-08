@@ -16,13 +16,28 @@
   --font-size-6xl: 4.5rem;
   --font-size-7xl: 5.5rem;
 
-  --color-background: #050816;
-  --color-card: #0F172A;
+  --color-background: var(--color-background);
+  --color-footer: var(--color-footer);
+  --color-card: var(--color-card);
   --color-primary: #3B82F6;
   --color-secondary: #8B5CF6;
   --color-accent: #06B6D4;
-  --color-text: #FFFFFF;
-  --color-muted: #94A3B8;
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+
+  --color-slate-100: var(--color-slate-100);
+  --color-slate-200: var(--color-slate-200);
+  --color-slate-300: var(--color-slate-300);
+  --color-slate-400: var(--color-slate-400);
+  --color-slate-500: var(--color-slate-500);
+  --color-slate-600: var(--color-slate-600);
+  --color-slate-700: var(--color-slate-700);
+  --color-slate-800: var(--color-slate-800);
+  --color-slate-850: var(--color-slate-850);
+  --color-slate-855: var(--color-slate-855);
+  --color-slate-900: var(--color-slate-900);
+  --color-slate-955: var(--color-slate-955);
+  --color-slate-950: var(--color-slate-950);
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-spin-slow: spin 20s linear infinite;
@@ -45,8 +60,81 @@
 }
 
 :root {
-  --background: #050816;
-  --foreground: #FFFFFF;
+  --color-background: #050816;
+  --color-footer: #02040d;
+  --color-card: #0F172A;
+  --color-text: #FFFFFF;
+  --color-muted: #94A3B8;
+  
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-850: #151f32;
+  --color-slate-855: #111a2e;
+  --color-slate-900: #0f172a;
+  --color-slate-955: #090e1a;
+  --color-slate-950: #020617;
+  
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(15, 23, 42, 0.6);
+  --glass-hover-border: rgba(59, 130, 246, 0.3);
+  --glass-shadow: rgba(0, 0, 0, 0.37);
+  --nav-bg-scrolled: rgba(10, 15, 30, 0.75);
+  --nav-border-scrolled: rgba(59, 130, 246, 0.18);
+  --nav-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px 0 rgba(59, 130, 246, 0.05);
+  
+  --selection-bg: rgba(139, 92, 246, 0.4);
+  --selection-text: #FFFFFF;
+  
+  --scrollbar-track: #050816;
+  --scrollbar-thumb: #1E293B;
+  --scrollbar-thumb-hover: #3B82F6;
+}
+
+.light {
+  --color-background: #F4F6FC; /* Elegant warm-cool light background */
+  --color-footer: #EFF2F9; /* Footer background */
+  --color-card: #FFFFFF; /* Pure white cards */
+  --color-text: #0F172A; /* Slate 900 for dark text */
+  --color-muted: #475569; /* Slate 600 */
+  
+  /* Swap dark slate values for light mode equivalents */
+  --color-slate-100: #0F172A;
+  --color-slate-200: #1E293B;
+  --color-slate-300: #334155;
+  --color-slate-400: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-600: #94a3b8;
+  --color-slate-700: #cbd5e1;
+  --color-slate-800: #e2e8f0;
+  --color-slate-850: #f1f5f9;
+  --color-slate-855: #f1f5f9;
+  --color-slate-900: #e2e8f0;
+  --color-slate-955: #f8fafc;
+  --color-slate-950: #f1f5f9;
+  
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(99, 102, 241, 0.08); /* Soft indigo border */
+  --glass-hover: rgba(255, 255, 255, 0.85);
+  --glass-hover-border: rgba(99, 102, 241, 0.18);
+  --glass-shadow: rgba(99, 102, 241, 0.04);
+  
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.55);
+  --nav-border-scrolled: rgba(99, 102, 241, 0.12);
+  --nav-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.06), 0 0 20px 0 rgba(99, 102, 241, 0.02);
+  
+  --selection-bg: rgba(139, 92, 246, 0.15);
+  --selection-text: #0F172A;
+  
+  --scrollbar-track: #F4F6FC;
+  --scrollbar-thumb: #CBD5E1;
+  --scrollbar-thumb-hover: #3B82F6;
 }
 
 /* Custom Scrollbar */
@@ -54,21 +142,21 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050816;
+  background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3B82F6;
+  background: var(--scrollbar-thumb-hover);
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  background-color: #050816;
-  color: #FFFFFF;
+  background-color: var(--color-background);
+  color: var(--color-text);
   overflow-x: hidden;
 }
 
@@ -97,27 +185,52 @@ html {
 }
 
 body {
-  background: #050816;
-  color: #FFFFFF;
+  background: var(--color-background);
+  color: var(--color-text);
   min-height: 100vh;
   position: relative;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+}
+
+.light,
+.light body {
+  /* Premium warm-to-cool soft colorful canvas gradient background */
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F5F3FF 100%) !important;
 }
 
 /* Glassmorphism Helper */
 .glass-card {
-  background: rgba(15, 23, 42, 0.45);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(99, 102, 241, 0.08) !important;
+  box-shadow: 
+    0 10px 30px -10px rgba(99, 102, 241, 0.05),
+    0 1px 3px rgba(99, 102, 241, 0.02) !important;
 }
 
 .glass-card-hover:hover {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: var(--glass-hover);
+  border-color: var(--glass-hover-border);
   box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.15);
+}
+
+.light .glass-card-hover:hover,
+.light .glass-card:hover {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(99, 102, 241, 0.18) !important;
+  box-shadow: 
+    0 15px 35px -8px rgba(99, 102, 241, 0.12),
+    0 2px 5px rgba(99, 102, 241, 0.04) !important;
 }
 
 /* Cyber Grid Background styling */
@@ -127,6 +240,12 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
   background-position: center center;
+}
+
+.light .cyber-grid {
+  background-image: 
+    linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px) !important;
 }
 
 /* Mouse cursor glow layer */
@@ -141,6 +260,10 @@ body {
   z-index: 1;
 }
 
+.light .mouse-glow {
+  background: radial-gradient(600px circle at var(--x, 0px) var(--y, 0px), rgba(139, 92, 246, 0.06), transparent 40%);
+}
+
 /* Radial spotlight layers */
 .spotlight-blue {
   background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
@@ -150,6 +273,10 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+.light .spotlight-blue {
+  background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 60%) !important;
 }
 
 .spotlight-purple {
@@ -162,10 +289,14 @@ body {
   pointer-events: none;
 }
 
+.light .spotlight-purple {
+  background: radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 60%) !important;
+}
+
 /* Selection Highlight */
 ::selection {
-  background: rgba(139, 92, 246, 0.4);
-  color: #FFFFFF;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 /* Float Animation */
@@ -179,4 +310,110 @@ body {
 
 .animate-float-fast {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Light Mode Overrides for Premium Contrast */
+.light {
+  /* Override general headers and specific text-white elements that are not inside solid dark components */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text) !important;
+  }
+}
+
+/* Ensure text-clipped elements always render correctly and show gradients */
+.bg-clip-text,
+[class*="bg-clip-text"] {
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+
+/* Ensure icons inside dark gradient boxes remain white */
+.light [class*="bg-gradient"] svg,
+.light [class*="from-"] svg {
+  stroke: #FFFFFF !important;
+}
+
+/* Force hover text-white class to resolve to dark text instead of blending invisibly on light backgrounds */
+.light [class*="hover:text-white"]:hover,
+.light .group:hover [class*="group-hover:text-white"],
+.light .group:hover .group-hover\:text-white,
+.light .hover\:text-white:hover {
+  color: var(--color-text) !important;
+}
+
+/* Only override text-white if it's not inside a gradient container, link, or button */
+.light .text-white:not(
+  [class*="bg-gradient"], 
+  [class*="from-"],
+  [class*="bg-primary"],
+  [class*="bg-secondary"],
+  button, 
+  a, 
+  .keep-white
+) {
+  color: var(--color-text);
+}
+
+/* Overrides for text and icons inside slate-style backgrounds which are now light-colored */
+.light [class*="bg-slate-900"].text-white,
+.light [class*="bg-slate-950"].text-white,
+.light [class*="bg-slate-955"].text-white,
+.light [class*="bg-slate-800"].text-white,
+.light [class*="bg-slate-850"].text-white,
+.light [class*="bg-slate-900"] .text-white,
+.light [class*="bg-slate-950"] .text-white,
+.light [class*="bg-slate-955"] .text-white,
+.light [class*="bg-slate-800"] .text-white,
+.light [class*="bg-slate-850"] .text-white {
+  color: var(--color-text) !important;
+}
+
+.light [class*="bg-slate-900"] svg,
+.light [class*="bg-slate-950"] svg,
+.light [class*="bg-slate-955"] svg,
+.light [class*="bg-slate-800"] svg,
+.light [class*="bg-slate-850"] svg {
+  stroke: var(--color-text) !important;
+}
+
+/* Special overrides for inputs and specific widgets in light mode */
+.light input::placeholder, 
+.light textarea::placeholder {
+  color: #94A3B8 !important; /* Slate 400 */
+}
+
+/* Force light mode background matching for specific icons or details if needed */
+.light svg[stroke="#FFFFFF"], 
+.light svg[stroke="#fff"] {
+  stroke: var(--color-text) !important;
+}
+
+/* Let's make sure SVGs inside case-study page adapt beautifully */
+.light svg rect[fill="#0f172a"],
+.light svg rect[fill="#050816"],
+.light svg rect[fill="#020617"],
+.light svg rect[fill="#090e1a"] {
+  fill: var(--color-card) !important;
+  stroke: var(--color-slate-800) !important;
+}
+
+.light svg text[fill="#fff"],
+.light svg text[fill="#ffffff"] {
+  fill: var(--color-text) !important;
+}
+
+.light svg line[stroke="#1e293b"],
+.light svg path[stroke="#1e293b"],
+.light svg circle[stroke="#1e293b"],
+.light svg line[stroke="#475569"],
+.light svg path[stroke="#475569"],
+.light svg path[stroke="#1f2937"] {
+  stroke: var(--color-slate-800) !important;
+}
+
+/* Cursor blending fixes for light mode */
+.light [class*="mix-blend-screen"] {
+  mix-blend-mode: normal !important;
 }

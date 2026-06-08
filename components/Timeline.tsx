@@ -51,7 +51,7 @@ export default function Timeline() {
                   {/* Central glowing node pointer */}
                   <div className="absolute left-4 md:left-1/2 top-6 transform -translate-x-1/2 z-10">
                     <motion.div 
-                      className={`w-4 h-4 rounded-full border-2 bg-[#050816] flex items-center justify-center ${
+                      className={`w-4 h-4 rounded-full border-2 bg-background flex items-center justify-center ${
                         index === timelineData.length - 1 
                           ? "border-accent shadow-[0_0_10px_#06b6d4]" 
                           : "border-primary"

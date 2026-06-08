@@ -1,10 +1,17 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useTheme } from "./ThemeProvider";
 
 export default function TechScene() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [webGlSupported, setWebGlSupported] = useState(true);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -48,10 +55,10 @@ export default function TechScene() {
     const globeRadius = 3.6;
     const globeGeometry = new THREE.SphereGeometry(globeRadius, 24, 24);
     const globeMaterial = new THREE.MeshBasicMaterial({
-      color: 0x3b82f6,
+      color: mounted && theme === 'light' ? 0x6366f1 : 0x3b82f6,
       wireframe: true,
       transparent: true,
-      opacity: 0.12,
+      opacity: mounted && theme === 'light' ? 0.22 : 0.12,
     });
     const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
     mainGroup.add(globeMesh);
@@ -103,7 +110,7 @@ export default function TechScene() {
       if (ctx) {
         const grad = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
         grad.addColorStop(0, "rgba(255, 255, 255, 1)");
-        grad.addColorStop(0.3, "rgba(6, 182, 212, 0.8)");
+        grad.addColorStop(0.3, mounted && theme === 'light' ? "rgba(99, 102, 241, 0.95)" : "rgba(6, 182, 212, 0.8)");
         grad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, size, size);
@@ -115,7 +122,7 @@ export default function TechScene() {
       size: 0.35,
       map: createCircleTexture(),
       transparent: true,
-      blending: THREE.AdditiveBlending,
+      blending: mounted && theme === 'light' ? THREE.NormalBlending : THREE.AdditiveBlending,
       depthWrite: false,
     });
 
@@ -124,10 +131,10 @@ export default function TechScene() {
 
     // 3. Dynamic Neural Connections (Lines)
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x8b5cf6,
+      color: mounted && theme === 'light' ? 0x6366f1 : 0x8b5cf6,
       transparent: true,
-      opacity: 0.18,
-      blending: THREE.AdditiveBlending,
+      opacity: mounted && theme === 'light' ? 0.35 : 0.18,
+      blending: mounted && theme === 'light' ? THREE.NormalBlending : THREE.AdditiveBlending,
     });
 
     // Create container for line segments
@@ -172,11 +179,11 @@ export default function TechScene() {
 
     starGeometry.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
     const starMaterial = new THREE.PointsMaterial({
-      color: 0x06b6d4,
+      color: mounted && theme === 'light' ? 0x4f46e5 : 0x06b6d4,
       size: 0.08,
       transparent: true,
-      opacity: 0.45,
-      blending: THREE.AdditiveBlending,
+      opacity: mounted && theme === 'light' ? 0.65 : 0.45,
+      blending: mounted && theme === 'light' ? THREE.NormalBlending : THREE.AdditiveBlending,
     });
     const starPoints = new THREE.Points(starGeometry, starMaterial);
     mainGroup.add(starPoints);

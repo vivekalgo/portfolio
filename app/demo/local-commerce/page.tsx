@@ -26,7 +26,7 @@ export default function LocalCommerceDemo() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050816] text-white relative overflow-hidden">
+    <main className="min-h-screen bg-background text-text relative overflow-hidden transition-colors duration-300">
       {/* Background glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-indigo-600/10 blur-[120px]" />

@@ -25,7 +25,7 @@ export default function Home() {
       <PageLoader onComplete={() => setLoading(false)} />
       
       {!loading && (
-        <main className="min-h-screen bg-[#050816] text-white relative overflow-hidden">
+        <main className="min-h-screen bg-background text-text relative overflow-hidden transition-colors duration-300">
           
           {/* Global Custom Cursor dot & glow rings */}
           <CustomCursor />

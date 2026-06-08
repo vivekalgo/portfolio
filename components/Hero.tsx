@@ -5,6 +5,7 @@ import { Mail, ArrowRight, FileText, Sparkles } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons/BrandIcons";
 import TechScene from "./TechScene";
 import { personalInfo } from "../data/portfolioData";
+import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
@@ -12,6 +13,20 @@ export default function Hero() {
   const [titleIdx, setTitleIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const nameGradient = mounted && theme === 'light'
+    ? "from-indigo-600 via-violet-600 to-pink-500"
+    : "from-white via-slate-100 to-slate-400";
+
+  const titleGradient = mounted && theme === 'light'
+    ? "from-blue-600 via-indigo-500 to-cyan-500"
+    : "from-primary via-secondary to-accent";
 
   // Typing effect loop
   useEffect(() => {
@@ -81,20 +96,28 @@ export default function Hero() {
           {/* Sparkle greeting tag */}
           <motion.div 
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 w-fit mb-6 shadow-inner"
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full w-fit mb-6 shadow-inner ${
+              mounted && theme === 'light'
+                ? "bg-indigo-50/70 border border-indigo-100/80"
+                : "bg-slate-900/60 border border-slate-800/80"
+            }`}
           >
-            <Sparkles className="w-4 h-4 text-accent animate-pulse" />
-            <span className="text-[10px] uppercase font-mono tracking-widest text-slate-300">
+            <Sparkles className={`w-4 h-4 animate-pulse ${
+              mounted && theme === 'light' ? "text-indigo-600" : "text-accent"
+            }`} />
+            <span className={`text-[10px] uppercase font-mono tracking-widest ${
+              mounted && theme === 'light' ? "text-indigo-600 font-semibold" : "text-slate-300"
+            }`}>
               Welcome to the Future of Product Building
             </span>
           </motion.div>
-
+ 
           {/* Name */}
           <motion.h1 
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4 uppercase"
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 uppercase"
           >
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
+            <span className={`block bg-clip-text text-transparent bg-gradient-to-r ${nameGradient}`}>
               {personalInfo.name}
             </span>
           </motion.h1>
@@ -104,7 +127,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-xl sm:text-2xl md:text-3xl font-mono text-slate-300 font-bold mb-6 h-10 flex items-center"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
+            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${titleGradient}`}>
               {typedText}
             </span>
             <span className="w-1.5 h-6 bg-accent ml-1 animate-pulse" />
@@ -126,7 +149,11 @@ export default function Hero() {
             {/* View Projects */}
             <a 
               href="#projects" 
-              className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-primary via-secondary to-accent hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] font-semibold text-sm transition-all text-center flex items-center justify-center gap-2 group text-white"
+              className={`px-6 py-3.5 rounded-lg bg-gradient-to-r from-primary via-secondary to-accent font-semibold text-sm transition-all text-center flex items-center justify-center gap-2 group text-white ${
+                mounted && theme === 'light'
+                  ? "hover:shadow-[0_8px_25px_rgba(139,92,246,0.35)]"
+                  : "hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]"
+              }`}
             >
               <span>View Projects</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -135,7 +162,11 @@ export default function Hero() {
             {/* Contact */}
             <a 
               href="#contact" 
-              className="px-6 py-3.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-850 font-semibold text-sm transition-all text-center flex items-center justify-center gap-2 text-white"
+              className={`px-6 py-3.5 rounded-lg border border-dashed text-center flex items-center justify-center gap-2 font-mono text-xs transition-all ${
+                mounted && theme === 'light'
+                  ? "bg-indigo-50/40 border-indigo-200 text-indigo-600 hover:bg-indigo-50/80"
+                  : "bg-slate-900/50 hover:bg-slate-900 border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white"
+              }`}
             >
               Contact Me
             </a>
@@ -144,9 +175,13 @@ export default function Hero() {
               href={personalInfo.socials.resume} 
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3.5 rounded-lg bg-slate-900/50 hover:bg-slate-900 border border-dashed border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-mono text-xs transition-all text-center flex items-center justify-center gap-2"
+              className={`px-6 py-3.5 rounded-lg border border-dashed text-center flex items-center justify-center gap-2 font-mono text-xs transition-all ${
+                mounted && theme === 'light'
+                  ? "bg-indigo-50/40 border-indigo-200 text-indigo-600 hover:bg-indigo-50/80"
+                  : "bg-slate-900/50 hover:bg-slate-900 border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white"
+              }`}
             >
-              <FileText className="w-4 h-4 text-accent" />
+              <FileText className={`w-4 h-4 ${mounted && theme === 'light' ? "text-indigo-600" : "text-accent"}`} />
               <span>Resume.pdf</span>
             </a>
           </motion.div>
@@ -164,7 +199,11 @@ export default function Hero() {
                 href={personalInfo.socials.github} 
                 target="_blank" 
                 rel="noreferrer" 
-                className="w-10 h-10 rounded-full border border-slate-855 bg-slate-950 flex items-center justify-center text-slate-400 hover:text-white hover:border-primary transition-all hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  mounted && theme === 'light'
+                    ? "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-400 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] cursor-pointer"
+                    : "border border-slate-855 bg-slate-950 text-slate-400 hover:text-white hover:border-primary hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+                }`}
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
@@ -172,13 +211,21 @@ export default function Hero() {
                 href={personalInfo.socials.linkedin} 
                 target="_blank" 
                 rel="noreferrer" 
-                className="w-10 h-10 rounded-full border border-slate-855 bg-slate-950 flex items-center justify-center text-slate-400 hover:text-[#0A66C2] hover:border-secondary transition-all hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]"
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  mounted && theme === 'light'
+                    ? "border border-slate-200 bg-white text-slate-600 hover:text-[#0A66C2] hover:border-slate-400 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] cursor-pointer"
+                    : "border border-slate-855 bg-slate-950 text-slate-400 hover:text-[#0A66C2] hover:border-secondary hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]"
+                }`}
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
                 href={personalInfo.socials.email} 
-                className="w-10 h-10 rounded-full border border-slate-850 bg-slate-950 flex items-center justify-center text-slate-400 hover:text-red-400 hover:border-accent transition-all hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  mounted && theme === 'light'
+                    ? "border border-slate-200 bg-white text-slate-600 hover:text-red-500 hover:border-slate-400 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] cursor-pointer"
+                    : "border border-slate-850 bg-slate-950 text-slate-400 hover:text-red-400 hover:border-accent hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                }`}
               >
                 <Mail className="w-4 h-4" />
               </a>
