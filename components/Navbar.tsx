@@ -79,7 +79,7 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-transform duration-300 group-hover:rotate-6">
               <Terminal className="w-4 h-4 text-white" />
             </div>
-            <span className="font-mono text-sm tracking-widest text-white group-hover:text-accent transition-colors font-bold">
+            <span className="font-mono text-sm tracking-widest text-slate-100 group-hover:text-accent transition-colors font-bold">
               VIVEK.DEV
             </span>
           </a>
@@ -129,7 +129,7 @@ export default function Navbar() {
             {/* Mobile menu trigger */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-2 rounded-md hover:bg-slate-800/50 text-slate-300 hover:text-white transition-colors"
+              className="md:hidden p-2 rounded-md hover:bg-slate-800/50 text-slate-300 hover:text-slate-100 transition-colors"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -141,7 +141,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-50 bg-[#050816]/95 backdrop-blur-xl flex flex-col justify-between p-6 md:hidden"
+            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex flex-col justify-between p-6 md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -150,13 +150,13 @@ export default function Navbar() {
             <div className="flex flex-col">
               {/* Header inside drawer */}
               <div className="flex items-center justify-between mb-12">
-                <span className="font-mono text-sm tracking-widest text-white font-bold flex items-center gap-2">
+                <span className="font-mono text-sm tracking-widest text-slate-100 font-bold flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                   MENU
                 </span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-md hover:bg-slate-800/50 text-slate-300 hover:text-white transition-colors"
+                  className="p-2 rounded-md hover:bg-slate-800/50 text-slate-300 hover:text-slate-100 transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -169,7 +169,7 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl font-semibold text-slate-300 hover:text-white tracking-wide transition-colors py-2 border-b border-slate-900 flex items-center justify-between"
+                    className="text-2xl font-semibold text-slate-300 hover:text-slate-100 tracking-wide transition-colors py-2 border-b border-slate-900 flex items-center justify-between"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
@@ -188,11 +188,11 @@ export default function Navbar() {
                 <span className="font-mono text-xs text-slate-400 tracking-wider">THEME MODE</span>
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-slate-100 transition-all cursor-pointer"
                 >
                   {mounted && theme === "light" ? (
                     <>
-                      <Moon className="w-3.5 h-3.5 text-indigo-400" />
+                      <Moon className="w-3.5 h-3.5 text-indigo-600" />
                       <span className="text-xs font-mono">Dark Mode</span>
                     </>
                   ) : (
